@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { storage } from "./firebase.config";
-import { deleteObject, ref, uploadBytes } from "firebase/storage";
+import {
+  deleteObject,
+  getDownloadURL,
+  ref,
+  uploadBytes,
+} from "firebase/storage";
 import { v4 } from "uuid";
 import { MdDelete } from "react-icons/md";
 
@@ -22,10 +27,17 @@ const TitleImage = ({ handleChange, heading, imageAdd }) => {
     const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
     uploadBytes(imageRef, imageUpload)
       .then((snapshot) => {
-        handleChange(snapshot.metadata.name, "img");
-        alert("image uploaded successfully");
+        getDownloadURL(imageRef)
+          .then((url) => {
+            handleChange(url, "img");
+            alert("image uploaded successfully");
+          })
+          .catch((error) => {
+            alert(error.message);
+          });
       })
       .catch((error) => {
+        alert(error.message);
         alert("error in uploading image");
       });
   };
@@ -89,7 +101,7 @@ const TitleImage = ({ handleChange, heading, imageAdd }) => {
 //function to delete uploaded image
 const deleteImg = async (imageAdd) => {
   try {
-    const desertRef = ref(storage, `images/${imageAdd}`);
+    const desertRef = ref(storage, `${imageAdd}`);
     await deleteObject(desertRef);
     return true;
   } catch (error) {

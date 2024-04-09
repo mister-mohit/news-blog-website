@@ -4,6 +4,7 @@ import connectMongodb, {
   deleteBlog,
   getBlogData,
   getBlogs,
+  getCategoryBlogs,
   saveData,
 } from "./dbConnection.js";
 import bodyParser from "body-parser";
@@ -19,15 +20,21 @@ app.use(express.static("public"));
 
 connectMongodb();
 
-app.get("/", (req, res) => {
-  res.sendFile("./public/index.html");
-})
-
 //it will create a new document and returns id for the reference.
 app.get("/newBlog", async (req, res) => {
   try {
     const id = await createNewBlog("Ashish Kumar Jain");
     res.send({ id });
+  } catch (error) {
+    res.status(500).send({ error: error.message });
+  }
+});
+
+app.get("/:category", async (req, res) => {
+  const category = req.params.category;
+  try {
+    const response = await getCategoryBlogs(category);
+    res.send(response);
   } catch (error) {
     res.status(500).send({ error: error.message });
   }

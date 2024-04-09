@@ -33,22 +33,34 @@ async function deleteAll() {
 const Blog = new mongoose.model("Blog", blogSchema);
 
 const createNewBlog = async (newAuthor) => {
-  //deleteAll();
-  const newBlog = new Blog({
-    author: newAuthor,
-    createdAt: null,
-    title: "",
-    content: "",
-    category: "",
-    imageAdd: "",
-    status: "",
-  });
-
   try {
+    const newBlog = new Blog({
+      author: newAuthor,
+      createdAt: null,
+      title: "",
+      content: "",
+      category: "",
+      imageAdd: "",
+      status: "",
+    });
+
     const response = await newBlog.save();
+    console.log(response);
     return response._id;
   } catch (error) {
-    console.log("error in deleting", error.message);
+    console.log("error ", error.message);
+    throw error;
+  }
+};
+
+const getCategoryBlogs = async (searchCategory) => {
+  try {
+    const response = await Blog.find({
+      category: searchCategory,
+      status: "published",
+    });
+    return response;
+  } catch (error) {
     throw error;
   }
 };
@@ -94,5 +106,12 @@ const deleteBlog = async (blogId) => {
   }
 };
 
-export { createNewBlog, getBlogData, saveData, deleteBlog, getBlogs };
+export {
+  createNewBlog,
+  getBlogData,
+  saveData,
+  deleteBlog,
+  getBlogs,
+  getCategoryBlogs,
+};
 export default connectMongodb;
