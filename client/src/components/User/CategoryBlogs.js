@@ -1,11 +1,9 @@
-import React from "react";
 import { useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
 import BlogCard from "./BlogCard";
+import { useQuery } from "@tanstack/react-query";
 
 const CategoryBlogs = () => {
   const { category } = useParams();
-
   const { data, isLoading, error } = useQuery({
     queryKey: ["category", category],
     queryFn: async () => {
@@ -13,6 +11,7 @@ const CategoryBlogs = () => {
         const response = await fetch(
           `http://localhost:5000/${category.toLowerCase()}`
         );
+        
         return response.json();
       } catch (error) {
         return error.message;
@@ -20,7 +19,6 @@ const CategoryBlogs = () => {
     },
   });
 
-  const dataSubArr = data?.slice(1);
 
   if (isLoading) {
     return (
@@ -29,16 +27,14 @@ const CategoryBlogs = () => {
       </div>
     );
   }
+
   return (
-    <div>
-      <div className="flex justify-center items-center">
-        <section className=" w-[60%] flex flex-wrap justify-center gap-4">
-          {dataSubArr.map((blog) => (
-            <BlogCard key={blog._id} data={blog} />
-          ))}
-        </section>
-        <aside></aside>
-      </div>
+    <div className="flex justify-center items-center">
+      <section className=" w-[45%] grid grid-cols-2 grid-rows-auto gap-4">
+        {data.map((blog, index) => (
+          <BlogCard key={blog._id} data={blog} isFirst={index === 0} />
+        ))}
+      </section>
     </div>
   );
 };

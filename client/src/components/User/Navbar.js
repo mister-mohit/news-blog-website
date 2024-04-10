@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 const Navbar = () => {
   const categories = ["Politics", "Technology", "Education", "News"];
   const { category: searchCategory } = useParams();
-  console.log(searchCategory);
+
   return (
     <div className="bg-black text-xl flex sm:px-20 px-4 text-white justify-between font-bold">
       {/* div for categories */}

@@ -42,12 +42,12 @@ app.get("/:category", async (req, res) => {
 
 //it will fetch blog using blogId
 app.get("/getBlog/:blogId", async (req, res) => {
+  const blogId = req.params.blogId;
   try {
-    const blogId = req.params.blogId;
-    const blogData = await getBlogData(blogId);
-    res.send({ blogData });
+    const response = await getBlogData(blogId);
+    res.send(response);
   } catch (error) {
-    res.status(500).send({ error: error.message });
+    
   }
 });
 

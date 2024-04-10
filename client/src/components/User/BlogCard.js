@@ -1,15 +1,26 @@
 import { IoCalendarClear } from "react-icons/io5";
 import { GiCharacter } from "react-icons/gi";
+import { useNavigate } from "react-router-dom";
 
-const BlogCard = ({ data }) => {
+const BlogCard = ({ data, isFirst }) => {
   const content = data.content;
   const parser = new DOMParser();
   const doc = parser.parseFromString(content, "text/html");
   const date = new Date();
   const year = date.getFullYear();
+  const navigate = useNavigate();
+
   return (
-    <div className="sm:w-[45%] w-fit h-fit  border border-gray-300 rounded-md ">
-      <div className="h-[180px] w-full border-b border-gray-300 ">
+    <div
+      className={`${
+        isFirst ? "col-span-2" : "col-span-1"
+      } sm:w-[100%] h-fit  border border-gray-300 rounded-md `}
+    >
+      <div
+        className={`${
+          isFirst ? "h-[240px]" : "h-[180px]"
+        } w-full border-b border-gray-300 `}
+      >
         <img
           className="w-full h-full object-contain"
           src={data.imageAdd}
@@ -37,7 +48,10 @@ const BlogCard = ({ data }) => {
             165
           )}...`}</p>
         </div>
-        <button className="p-2 bg-[#207daf] text-white font-semibold rounded-md">
+        <button
+          className="p-2 bg-[#207daf] text-white font-semibold rounded-md"
+          onClick={() => navigate(`/blogId/${data._id}`)}
+        >
           Read More
         </button>
       </div>
