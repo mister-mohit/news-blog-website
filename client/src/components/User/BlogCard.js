@@ -6,6 +6,7 @@ const BlogCard = ({ data, isFirst }) => {
   const content = data.content;
   const parser = new DOMParser();
   const doc = parser.parseFromString(content, "text/html");
+  const limit = isFirst ? 330 : 165;
   const date = new Date();
   const year = date.getFullYear();
   const navigate = useNavigate();
@@ -18,11 +19,11 @@ const BlogCard = ({ data, isFirst }) => {
     >
       <div
         className={`${
-          isFirst ? "h-[240px]" : "h-[180px]"
+          isFirst ? "h-[400px]" : "h-[250px]"
         } w-full border-b border-gray-300 `}
       >
         <img
-          className="w-full h-full object-contain"
+          className="w-full h-full "
           src={data.imageAdd}
           alt="blogImage"
         />
@@ -45,7 +46,7 @@ const BlogCard = ({ data, isFirst }) => {
           <h3 className="text-2xl font-semibold break-all">{data.title}</h3>
           <p className="text-gray-600 break-all">{`${doc.body.textContent.slice(
             0,
-            165
+            limit
           )}...`}</p>
         </div>
         <button

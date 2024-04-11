@@ -53,12 +53,10 @@ const createNewBlog = async (newAuthor) => {
   }
 };
 
-const getCategoryBlogs = async (searchCategory) => {
+const getCategoryBlogs = async (searchCategory, blogId) => {
+ 
   try {
-    const response = await Blog.find({
-      category: searchCategory,
-      status: "published",
-    });
+  const response = await Blog.find({category : searchCategory, status: "published"});
     return response;
   } catch (error) {
     throw error;
@@ -71,6 +69,18 @@ const getBlogData = async (blogId) => {
     return blog;
   } catch (error) {
     console.log("error : ", error.message);
+    throw error;
+  }
+};
+
+const getLatestBlogs = async () => {
+  try {
+    const response = await Blog.find({ status: "published" }).sort({_id:-1}).limit(5);
+    if(!response){
+      throw new Error("Unable to fetch blog");
+    }
+    return response;
+  } catch (error) {
     throw error;
   }
 };
@@ -113,5 +123,6 @@ export {
   deleteBlog,
   getBlogs,
   getCategoryBlogs,
+  getLatestBlogs,
 };
 export default connectMongodb;

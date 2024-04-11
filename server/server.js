@@ -5,6 +5,7 @@ import connectMongodb, {
   getBlogData,
   getBlogs,
   getCategoryBlogs,
+  getLatestBlogs,
   saveData,
 } from "./dbConnection.js";
 import bodyParser from "body-parser";
@@ -30,6 +31,16 @@ app.get("/newBlog", async (req, res) => {
   }
 });
 
+app.get("/getLatestBlogs", async (req, res) => {
+  console.log("hello slfdlkf")
+  try {
+    const response = await getLatestBlogs();
+    res.send(response);
+  } catch (error) {
+    console.log(error.message);
+  }
+});
+
 app.get("/:category", async (req, res) => {
   const category = req.params.category;
   try {
@@ -46,9 +57,7 @@ app.get("/getBlog/:blogId", async (req, res) => {
   try {
     const response = await getBlogData(blogId);
     res.send(response);
-  } catch (error) {
-    
-  }
+  } catch (error) {}
 });
 
 //this will fetch published/draft blogs as per user requirement
@@ -61,6 +70,7 @@ app.get("/getBlogs/:status", async (req, res) => {
     res.status(500).send({ error: error.message });
   }
 });
+
 
 //this will update the changes made in blog in database
 app.post("/:blogId/edit", async (req, res) => {

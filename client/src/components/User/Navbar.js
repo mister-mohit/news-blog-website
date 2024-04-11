@@ -7,7 +7,7 @@ const Navbar = () => {
   const { category: searchCategory } = useParams();
 
   return (
-    <div className="bg-black text-xl flex sm:px-20 px-4 text-white justify-between font-bold">
+    <div className="bg-black text-xl flex sm:px-20 px-4 text-white justify-between font-bold border-t-4 border-[#c57eef]">
       {/* div for categories */}
       <div className="flex gap-6">
         <a

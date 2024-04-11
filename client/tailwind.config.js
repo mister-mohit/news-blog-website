@@ -8,7 +8,12 @@ export const plugins = [
     const newUtilities = {
       ".custom-class h2,h3": {
         fontSize: "24px",
-        fontWeight: "600",
+        fontWeight: "500",
+      },
+
+      ".custom-p": {
+        fontSize: "16px",
+        fontWeight: "400",
       },
     };
 
