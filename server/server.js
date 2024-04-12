@@ -6,6 +6,7 @@ import connectMongodb, {
   getBlogs,
   getCategoryBlogs,
   getLatestBlogs,
+  getSearchedBlog,
   saveData,
 } from "./dbConnection.js";
 import bodyParser from "body-parser";
@@ -36,9 +37,19 @@ app.get("/getLatestBlogs", async (req, res) => {
     const response = await getLatestBlogs();
     res.send(response);
   } catch (error) {
-    res.status(500).send("unable to fetch blogs");
+    res.status(500).send({error:"unable to fetch blogs"});
   }
 });
+
+app.get("searchBlog/str", async (req, res) => {
+  const queryStr = req.query.queryParam;
+  try {
+    const response = await getSearchedBlog(query)
+    res.send()
+  } catch (error) {
+    res.status(500).send({error: "didn't find any matching blog"})
+  }
+})
 
 app.get("/:category", async (req, res) => {
   const category = req.params.category;

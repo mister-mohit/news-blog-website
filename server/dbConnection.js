@@ -63,6 +63,18 @@ const getCategoryBlogs = async (searchCategory, blogId) => {
   }
 };
 
+const getSearchedBlog = async (searchStr) => {
+  try{
+    const response = await Blog.find({title : {$regex : searchStr, $options : "m"}, status: "published"});
+    if(!response){
+      throw new Error("didn't find any blog");
+    }
+    return response;
+  } catch(error) {
+    throw error;
+  }
+}
+
 const getBlogData = async (blogId) => {
   try {
     const blog = await Blog.findById(blogId);
@@ -124,5 +136,6 @@ export {
   getBlogs,
   getCategoryBlogs,
   getLatestBlogs,
+  getSearchedBlog
 };
 export default connectMongodb;
