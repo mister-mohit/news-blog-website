@@ -26,8 +26,8 @@ const ShowBlog = () => {
   }
 
   return (
-    <div className="flex py-20 text-xl justify-center items-start gap-16 ">
-      <section className=" w-[50%] border border-gray-400 rounded-md flex flex-col gap-2 bg-white">
+    <div className="flex lg:flex-row lg:items-start items-center flex-col py-20 text-xl justify-center gap-16 ">
+      <section className="w-[90%] lg:w-[50%] border border-gray-400 rounded-md flex flex-col gap-2 bg-white">
         <img
           src={data.imageAdd}
           alt="loading"

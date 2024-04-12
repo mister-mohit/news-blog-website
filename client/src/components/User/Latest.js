@@ -21,11 +21,11 @@ const Latest = () => {
     return <div>{error.message}</div>;
   }
   return (
-    <div className="flex flex-col gap-4">
-      <h2 className="bg-[#c57eef] text-xl w-1/2 text-white font-medium  rounded-md px-4 py-4 text-center">
+    <div className="flex flex-col gap-4 ">
+      <h2 className="bg-[#c57eef]  w-1/2 text-white font-medium  rounded-md px-4 py-4 text-center">
         Latest blogs
       </h2>
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-4">
         {data?.map((blog) => (
           <ShortBlogCard key={blog._id} blogData={blog} />
         ))}

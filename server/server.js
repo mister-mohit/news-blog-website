@@ -32,12 +32,11 @@ app.get("/newBlog", async (req, res) => {
 });
 
 app.get("/getLatestBlogs", async (req, res) => {
-  console.log("hello slfdlkf")
   try {
     const response = await getLatestBlogs();
     res.send(response);
   } catch (error) {
-    console.log(error.message);
+    res.status(500).send("unable to fetch blogs");
   }
 });
 

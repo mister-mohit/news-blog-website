@@ -33,8 +33,8 @@ const CategoryBlogs = () => {
   const newIndex = (index + 1) % categories.length;
 
   return (
-    <div className="flex justify-center gap-16 py-20 ">
-      <section className=" w-[50%] grid grid-cols-2 grid-rows-auto gap-4">
+    <div className="flex lg:flex-row flex-col justify-center lg:items-start items-center gap-16 py-20 ">
+      <section className=" w-[90%] lg:w-[50%] grid grid-cols-2 grid-rows-auto gap-4">
         {data?.map((blog, index) => (
           <BlogCard key={blog._id} data={blog} isFirst={index === 0} />
         ))}

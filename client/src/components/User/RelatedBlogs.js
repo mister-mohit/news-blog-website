@@ -27,7 +27,7 @@ const RelatedBlogs = ({ isBlog, category, blogId }) => {
         {isBlog ? "Related Blogs" : `${category}`}
       </h2>
       <div>
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-4">
           {data?.map((blog) => {
             if (blog._id === blogId) return null; 
             return <ShortBlogCard key={blog._id} blogData={blog} />;
