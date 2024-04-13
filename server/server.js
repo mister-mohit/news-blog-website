@@ -51,23 +51,15 @@ app.get("/searchBlog/str", async (req, res) => {
   }
 });
 
-app.get("/:category", async (req, res) => {
-  const category = req.params.category;
-  try {
-    const response = await getCategoryBlogs(category);
-    res.send(response);
-  } catch (error) {
-    res.status(500).send({ error: error.message });
-  }
-});
-
 //it will fetch blog using blogId
 app.get("/getBlog/:blogId", async (req, res) => {
   const blogId = req.params.blogId;
   try {
     const response = await getBlogData(blogId);
     res.send(response);
-  } catch (error) {}
+  } catch (error) {
+    throw error;
+  }
 });
 
 //this will fetch published/draft blogs as per user requirement
@@ -76,6 +68,16 @@ app.get("/getBlogs/:status", async (req, res) => {
     const status = req.params.status;
     const blogs = await getBlogs(status);
     res.send(blogs);
+  } catch (error) {
+    res.status(500).send({ error: error.message });
+  }
+});
+
+app.get("/:category", async (req, res) => {
+  const category = req.params.category;
+  try {
+    const response = await getCategoryBlogs(category);
+    res.send(response);
   } catch (error) {
     res.status(500).send({ error: error.message });
   }

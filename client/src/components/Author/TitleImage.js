@@ -22,7 +22,7 @@ const TitleImage = ({ handleChange, heading, imageAdd }) => {
 
   //function to upload image to firebase
   const uploadFile = () => {
-    if (!imageUpload || imageAdd.length > 0) return;
+    if (!imageUpload || imageAdd?.length > 0) return;
 
     const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
     uploadBytes(imageRef, imageUpload)
@@ -82,15 +82,15 @@ const TitleImage = ({ handleChange, heading, imageAdd }) => {
           name="image"
           accept="image/png, image/jpeg"
           onChange={(e) => setImageUpload(e.target.files[0])}
-          disabled={imageAdd.length > 0 ? true : false}
+          disabled={imageAdd?.length > 0 ? true : false}
         />
         <button
           onClick={uploadFile}
-          disable={imageAdd.length > 0 ? true : false}
+          disable={imageAdd?.length > 0 ? true : false}
         >
-          {imageAdd.length > 0 ? "Already uploaded image" : "Upload Image"}
+          {imageAdd?.length > 0 ? "Already uploaded image" : "Upload Image"}
         </button>
-        {imageAdd.length > 0 ? (
+        {imageAdd?.length > 0 ? (
           <MdDelete onClick={() => deleteImage(imageAdd)} />
         ) : null}
       </div>

@@ -16,6 +16,7 @@ const useCustomQuery = (blogId) => {
     refetchOnWindowFocus: false,
   });
 
+
   const [blog, setBlog] = useState(data?.blogData || null);
   const [isNavigate, setIsNavigate] = useState(false);
 
@@ -77,7 +78,7 @@ const useCustomQuery = (blogId) => {
     }
   }, [blog, blogId, data, navigate, isNavigate]);
 
-  return [isLoading, isError, data?.blogData, error, blog, handleChange];
+  return [isLoading, isError, data, error, blog, handleChange];
 };
 
 export default useCustomQuery;
