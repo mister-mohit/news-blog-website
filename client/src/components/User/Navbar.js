@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import { GiHamburgerMenu } from "react-icons/gi";
 import Modal from "./Modal";
-import SearchBar, { SearchDisclosure } from "./SearchBar";
+import SearchBar from "./SearchBar";
 
 const Navbar = () => {
   const categories = ["Home","Politics", "Technology", "Education", "News"];

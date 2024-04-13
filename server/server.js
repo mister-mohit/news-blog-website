@@ -37,19 +37,19 @@ app.get("/getLatestBlogs", async (req, res) => {
     const response = await getLatestBlogs();
     res.send(response);
   } catch (error) {
-    res.status(500).send({error:"unable to fetch blogs"});
+    res.status(500).send({ error: "unable to fetch blogs" });
   }
 });
 
-app.get("searchBlog/str", async (req, res) => {
+app.get("/searchBlog/str", async (req, res) => {
   const queryStr = req.query.queryParam;
   try {
-    const response = await getSearchedBlog(query)
-    res.send()
+    const response = await getSearchedBlog(queryStr);
+    res.send(response);
   } catch (error) {
-    res.status(500).send({error: "didn't find any matching blog"})
+    res.status(500).send({ error: "didn't find any matching blog" });
   }
-})
+});
 
 app.get("/:category", async (req, res) => {
   const category = req.params.category;
@@ -80,7 +80,6 @@ app.get("/getBlogs/:status", async (req, res) => {
     res.status(500).send({ error: error.message });
   }
 });
-
 
 //this will update the changes made in blog in database
 app.post("/:blogId/edit", async (req, res) => {

@@ -54,9 +54,11 @@ const createNewBlog = async (newAuthor) => {
 };
 
 const getCategoryBlogs = async (searchCategory, blogId) => {
- 
   try {
-  const response = await Blog.find({category : searchCategory, status: "published"});
+    const response = await Blog.find({
+      category: searchCategory,
+      status: "published",
+    });
     return response;
   } catch (error) {
     throw error;
@@ -64,16 +66,19 @@ const getCategoryBlogs = async (searchCategory, blogId) => {
 };
 
 const getSearchedBlog = async (searchStr) => {
-  try{
-    const response = await Blog.find({title : {$regex : searchStr, $options : "m"}, status: "published"});
-    if(!response){
+  try {
+    const response = await Blog.find({
+      title: { $regex: searchStr, $options: "i" },
+      status: "published",
+    }); 
+    if (!response) {
       throw new Error("didn't find any blog");
     }
     return response;
-  } catch(error) {
+  } catch (error) {
     throw error;
   }
-}
+};
 
 const getBlogData = async (blogId) => {
   try {
@@ -87,8 +92,10 @@ const getBlogData = async (blogId) => {
 
 const getLatestBlogs = async () => {
   try {
-    const response = await Blog.find({ status: "published" }).sort({_id:-1}).limit(5);
-    if(!response){
+    const response = await Blog.find({ status: "published" })
+      .sort({ _id: -1 })
+      .limit(5);
+    if (!response) {
       throw new Error("Unable to fetch blog");
     }
     return response;
@@ -136,6 +143,6 @@ export {
   getBlogs,
   getCategoryBlogs,
   getLatestBlogs,
-  getSearchedBlog
+  getSearchedBlog,
 };
 export default connectMongodb;

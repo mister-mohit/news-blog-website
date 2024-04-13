@@ -15,7 +15,7 @@ const BlogCard = ({ data, isFirst }) => {
     <div
       className={`${
         isFirst ? "col-span-2" : "col-span-1"
-      } sm:w-[100%] h-fit  border border-gray-300 rounded-md `}
+      } sm:w-[100%] h-fit bg-white  border border-gray-300 rounded-md `}
     >
       <div
         className={`${

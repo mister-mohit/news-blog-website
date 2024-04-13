@@ -7,6 +7,7 @@ import MainLayout from "./pages/User/MainLayout";
 import CategoryBlogs from "./components/User/CategoryBlogs";
 import Home from "./components/User/Home";
 import ShowBlog from "./components/User/ShowBlog";
+import SearchedBlog from "./components/User/SearchedBlog";
 
 const queryClient = new QueryClient();
 
@@ -21,6 +22,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="/:category" element={<CategoryBlogs />} />
           <Route path="/blogId/:blogId" element={<ShowBlog />} />
+          <Route path="searchedBlog/str" element={<SearchedBlog />} />
         </Route>
       </Routes>
     </QueryClientProvider>
