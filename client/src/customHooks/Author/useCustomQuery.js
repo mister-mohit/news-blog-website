@@ -16,7 +16,6 @@ const useCustomQuery = (blogId) => {
     refetchOnWindowFocus: false,
   });
 
-
   const [blog, setBlog] = useState(data?.blogData || null);
   const [isNavigate, setIsNavigate] = useState(false);
 
