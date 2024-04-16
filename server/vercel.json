@@ -1,6 +1,9 @@
 {
   "version": 2,
-  "rewrites": [
-    { "source": "/getLatestBlogs", "destination": "/getLatestBlogs" }
+  "builds": [
+    {
+      "src": "./server.js",
+      "use": "@vercel/node"
+    }
   ]
 }
