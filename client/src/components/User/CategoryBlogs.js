@@ -10,7 +10,7 @@ const CategoryBlogs = () => {
     queryFn: async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/${category.toLowerCase()}`
+          `https://news-blog-website-production.up.railway.app/${category.toLowerCase()}`
         );
 
         return response.json();

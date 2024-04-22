@@ -5,7 +5,9 @@ const Latest = () => {
   const { data, error, isLoading } = useQuery({
     queryKey: ["latest"],
     queryFn: async () => {
-      const response = await fetch("http://localhost:5000/getLatestBlogs");
+      const response = await fetch(
+        "https://news-blog-website-production.up.railway.app/getLatestBlogs"
+      );
       if (!response.ok) {
         throw new Error("unable to fetch blog");
       }

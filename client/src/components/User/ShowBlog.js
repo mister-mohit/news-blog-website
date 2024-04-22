@@ -9,7 +9,9 @@ const ShowBlog = () => {
   const { data, isLoading, error } = useQuery({
     queryKey: ["blogId", blogId],
     queryFn: async () => {
-      const response = await fetch(`http://localhost:5000/getBlog/${blogId}`);
+      const response = await fetch(
+        `https://news-blog-website-production.up.railway.app/getBlog/${blogId}`
+      );
       if (!response.ok) {
         throw new Error("cannot fetch blog");
       }
@@ -34,7 +36,10 @@ const ShowBlog = () => {
           className="h-[450px] w-full mb-4 border-b border-gray-200"
         />
         <div className="p-6 flex flex-col items-start gap-4">
-          <a href={`/${data.category}`} className="py-1 px-2 bg-[#c57eef] text-white rounded-sm">
+          <a
+            href={`/${data.category}`}
+            className="py-1 px-2 bg-[#c57eef] text-white rounded-sm"
+          >
             {data.category}
           </a>
           <h1 className="font-semibold text-3xl break-all">{data.title}</h1>

@@ -8,7 +8,7 @@ const MenuDrawer = ({ setIsDraft, isDraft }) => {
   const navigate = useNavigate();
 
   const startNewBlog = async () => {
-    const response = await fetch("http://localhost:5000/newBlog");
+    const response = await fetch("https://news-blog-website-production.up.railway.app/newBlog");
     const resultId = await response.json();
     navigate(`/blog/${resultId.id}`);
   };

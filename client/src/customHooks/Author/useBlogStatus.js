@@ -5,9 +5,12 @@ const useBlogStatus = () => {
   const navigate = useNavigate();
 
   const deleteBlog = (blogId, handleChange) => {
-    fetch(`http://localhost:5000/delete/${blogId}`, {
-      method: "DELETE",
-    })
+    fetch(
+      `https://news-blog-website-production.up.railway.app/delete/${blogId}`,
+      {
+        method: "DELETE",
+      }
+    )
       .then((res) => res.json())
       .then(async (res) => {
         if (res.imageAdd?.length) {

@@ -7,19 +7,18 @@ const SearchedBlog = () => {
   const location = useLocation();
   const searchStr = new URLSearchParams(location.search);
 
-  const queryParam = searchStr.get('queryParam');
-
+  const queryParam = searchStr.get("queryParam");
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["queryParam", queryParam],
     queryFn: async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/searchBlog/str?queryParam=${queryParam}`
+          `https://news-blog-website-production.up.railway.app/searchBlog/str?queryParam=${queryParam}`
         );
         console.log(response);
-        if(!response.ok){
-            throw new Error("unable to fetch blog");
+        if (!response.ok) {
+          throw new Error("unable to fetch blog");
         }
         return response.json();
       } catch (error) {
@@ -37,9 +36,9 @@ const SearchedBlog = () => {
       </div>
     );
   }
-  
-  if(error) {
-    return (<div>{error.message}</div>)
+
+  if (error) {
+    return <div>{error.message}</div>;
   }
 
   const categories = ["Politics", "Technology", "Education", "News"];

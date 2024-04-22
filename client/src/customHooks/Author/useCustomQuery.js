@@ -7,7 +7,9 @@ const useCustomQuery = (blogId) => {
   const { isLoading, isError, data, error } = useQuery({
     queryKey: ["blog", blogId],
     queryFn: async () => {
-      const response = await fetch(`http://localhost:5000/getBlog/${blogId}`);
+      const response = await fetch(
+        `https://news-blog-website-production.up.railway.app/getBlog/${blogId}`
+      );
       if (!response) {
         throw new Error("Failed to fetch blog data");
       }
@@ -23,7 +25,6 @@ const useCustomQuery = (blogId) => {
     if (data) {
       setBlog(data.blogData);
     }
-    
   }, [data]);
 
   const handleChange = (value, tag) => {
@@ -42,12 +43,12 @@ const useCustomQuery = (blogId) => {
         break;
       case "publish":
         setBlog((prevVal) => ({ ...prevVal, status: "published" }));
-        setIsNavigate(prevVal => !prevVal)
+        setIsNavigate((prevVal) => !prevVal);
         alert("published successfully");
         break;
       case "draft":
         setBlog((prevVal) => ({ ...prevVal, status: "draft" }));
-        setIsNavigate(prevVal => !prevVal)
+        setIsNavigate((prevVal) => !prevVal);
         alert("blog drafted successfully");
         break;
       default:
@@ -57,13 +58,16 @@ const useCustomQuery = (blogId) => {
 
   useEffect(() => {
     const saveChanges = () => {
-      fetch(`http://localhost:5000/${blogId}/edit`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(blog),
-      })
+      fetch(
+        `https://news-blog-website-production.up.railway.app/${blogId}/edit`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(blog),
+        }
+      )
         .then((response) => {
           console.log("success");
         })
@@ -72,8 +76,8 @@ const useCustomQuery = (blogId) => {
         });
     };
     blog && saveChanges();
-    if(blog && isNavigate){
-      navigate("/author")
+    if (blog && isNavigate) {
+      navigate("/author");
     }
   }, [blog, blogId, data, navigate, isNavigate]);
 
